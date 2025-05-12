@@ -11,21 +11,33 @@ class NotesInfoList(BaseModel):
     notes: List[NotesInfo]
 
 class PaperFormat(BaseModel):
+    notes_id: str
+    page_ranges: List[str]
     no_of_mcqs: int
     no_of_short_answers: int
     no_of_long_answers: int
     difficulty_level: str = Field(..., regex="^(easy|medium|hard)$")
 
-class PaperRequest(BaseModel):
-    notes_id: str
-    page_ranges: List[str]
-    paper_format: PaperFormat
+class MCQ(BaseModel):
+    question_no : int
+    question: str
+    options: List[str]
+    answer: str
 
+class ShortQuestion(BaseModel):
+    question_no: int
+    question: str
+    answer: str
 
+class LongQuestion(BaseModel):
+    question_no: int
+    question: str
+    answer: str
 
 class PaperResponse(BaseModel):
-    mcqs: List[Tuple[str, List[str]]]
-    short_questions: List[str]
-    long_questions: List[str]
+    paper_format: PaperFormat
+    mcqs: List[MCQ]
+    short_questions: List[ShortQuestion]
+    long_questions: List[LongQuestion]
 
 
