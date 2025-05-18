@@ -1,11 +1,14 @@
 fastapi
 uvicorn
 pydantic
-openai
 langchain
+langchain_pinecone
+langchain_openai
+langchain-community
 langchain_huggingface
+pypdf
 transformers
-pinecone-client
+pinecone
 python-dotenv
 requests
 gunicorn
