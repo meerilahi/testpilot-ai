@@ -17,7 +17,8 @@ class AnswerSheet(BaseModel):
     pass
 
 class MarkAnswerSheetRequest(BaseModel):
-    pass
+    questions: Annotated[List[Question], "List of questions in the question paper"]
+    answer_sheet: Annotated[AnswerSheet, "The answer sheet to be marked"]
 
 
 
