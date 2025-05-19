@@ -3,8 +3,7 @@ from typing import List, Dict, Tuple
 from typing import Annotated, Optional
 
 
-class Question(BaseModel):
-    id: Annotated[str, "The unique identifier for the question"]
+class QuestionRubic(BaseModel):
     number: Annotated[int, "The question number in the paper"]
     type: Annotated[str, "The type of question (e.g., MCQ, short answer, long answer)"]
     question: Annotated[str, "The question text"]
@@ -13,14 +12,19 @@ class Question(BaseModel):
     marks : Annotated[int, "The marks assigned to the question"]
     grammer_weight: Annotated[float, "The weightage of grammar in the question"]
 
-class AnswerSheet(BaseModel):
-    pass
-
 class MarkAnswerSheetRequest(BaseModel):
-    questions: Annotated[List[Question], "List of questions in the question paper"]
-    answer_sheet: Annotated[AnswerSheet, "The answer sheet to be marked"]
+    questions_rubic: Annotated[List[QuestionRubic], "List of questions in the question paper"]
+    id: Annotated[str, "The id of answersheet to be marked"]
 
 
+
+class MarkedAnswer(BaseModel):
+    question_number: Annotated[int, "The question number in the paper"]
+    marks: Annotated[int, "The marks awarded for the answer"]
+    feedback: Annotated[Optional[str], "Feedback for the student"]
 
 class MarkAnswerSheetResponse(BaseModel):
-    pass
+    id: Annotated[str, "The id of the answersheet"]
+    mark_sheet: Annotated[List[MarkedAnswer], "List of marked answers"]
+    total_marks: Annotated[int, "The total marks obtained by the student"]
+    presentation_marks: Annotated[int, "The marks for presentation"]

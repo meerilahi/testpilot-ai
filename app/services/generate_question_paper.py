@@ -3,12 +3,12 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain.output_parsers import PydanticOutputParser
-from app.database.crud import get_book_pages
+from app.database.mongodb import get_book_pages
 
 load_dotenv()
 
 
-async def generate_question_paper_service(paperRequest: GenerateQuestionPaperRequest) -> GenerateQuestionPaperResponse:
+async def generate_question_paper_service(request: GenerateQuestionPaperRequest) -> GenerateQuestionPaperResponse:
     
     chat = ChatOpenAI()
     parser = PydanticOutputParser(pydantic_object=GenerateQuestionPaperResponse)
@@ -36,15 +36,15 @@ async def generate_question_paper_service(paperRequest: GenerateQuestionPaperReq
     chain = prompt_template | chat | parser
 
     syllabus_text = get_book_pages(
-        paperRequest.notes_id,
-        paperRequest.pages_list
+        request.notes_id,
+        request.pages_list
     )
     syllabus_text = "\n".join(syllabus_text)
 
     return await chain.ainvoke({
         "syllabus_text": syllabus_text,
-        "difficulty_level": paperRequest.difficulty_level,
-        "no_of_mcq": paperRequest.no_of_mcq,
-        "no_of_short_questions": paperRequest.no_of_short_questions,
-        "no_of_long_questions": paperRequest.no_of_long_questions,
+        "difficulty_level": request.difficulty_level,
+        "no_of_mcq": request.no_of_mcq,
+        "no_of_short_questions": request.no_of_short_questions,
+        "no_of_long_questions": request.no_of_long_questions,
     })
