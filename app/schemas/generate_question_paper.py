@@ -5,6 +5,7 @@ from typing import Annotated
 
 class GenerateQuestionPaperRequest(BaseModel):
     notes_id: Annotated[str, "The Identifier of the notes from which the question paper is generated"]
+    pages_list: Annotated[List[int], "List of page numbers from the notes to be included in the question paper"]
     no_of_mcq: Annotated[int, "Number of multiple-choice questions"]
     no_of_short_questions: Annotated[int, "Number of short questions"]
     no_of_long_questions: Annotated[int, "Number of long questions"]

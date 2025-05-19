@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain.output_parsers import PydanticOutputParser
+from app.database.crud import get_book_pages
 
 load_dotenv()
 
@@ -32,11 +33,16 @@ async def generate_question_paper_service(paperRequest: GenerateQuestionPaperReq
             "FORMAT_INSTRUCTIONS": parser.get_format_instructions()
         },
     )
-
     chain = prompt_template | chat | parser
 
+    syllabus_text = get_book_pages(
+        paperRequest.notes_id,
+        paperRequest.pages_list
+    )
+    syllabus_text = "\n".join(syllabus_text)
+
     return await chain.ainvoke({
-        "syllabus_text": SYLLABUS_TEXT,
+        "syllabus_text": syllabus_text,
         "difficulty_level": paperRequest.difficulty_level,
         "no_of_mcq": paperRequest.no_of_mcq,
         "no_of_short_questions": paperRequest.no_of_short_questions,

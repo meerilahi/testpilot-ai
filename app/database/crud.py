@@ -2,15 +2,14 @@ from uuid import uuid4
 from typing import List
 from langchain.docstore.document import Document
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.document_loaders import PyPDFLoader
 from dotenv import load_dotenv
-from pinecone_db import get_index
+from pinecone_db import get_pinecone_index
 from typing import List
 import re
 
 load_dotenv()
 
-index = get_index()
+index = get_pinecone_index()
 embedding_model = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-large")
 
 def add_new_book(pages: List[Document]):
@@ -29,8 +28,8 @@ def add_new_book(pages: List[Document]):
             }
         })
     index.upsert(vectors=vectors, namespace=namespace)
-    print(f"✅ Book uploaded to namespace: {namespace} with book_id: {book_id}")
     return page_id
+
 
 def get_book_pages(book_id: str, page_numbers: List[int]) -> List[str]:
     namespace = "books"
@@ -45,40 +44,29 @@ def get_book_pages(book_id: str, page_numbers: List[int]) -> List[str]:
 
 def get_books_ids() -> List[str]:
     namespace = "books"
-    ids_generator = index.list(namespace=namespace)
-    
+    ids_list = list(index.list(namespace=namespace))[0]
     book_ids = set()
-    pattern = re.compile(r"book-([a-f0-9]+)-page-\d+")
-
-    for item in ids_generator:
-        # If item is a string, use it as-is
-        # If it's a dict or object, try to get the 'id' field
-        if isinstance(item, str):
-            vid = item
-        elif isinstance(item, dict) and 'id' in item:
-            vid = item['id']
-        else:
-            continue  # skip anything unexpected
-
-        match = pattern.match(vid)
+    for id in ids_list:
+        match = re.search(r"book-([^-]+)-page-\d+", id)
         if match:
-            book_ids.add(match.group(1))
-
+            book_id = match.group(1)
+            book_ids.add(book_id)
     return list(book_ids)
 
-
-book_ids = get_books_ids()
-print("✅ Book IDs found:", book_ids)
-
+# from langchain_community.document_loaders import PyPDFLoader
 # loader = PyPDFLoader("book.pdf")
 # pages = loader.load()
 # book_id = add_new_book(pages)
 
-
 # book_id = "698daf88c3a84ce6b282fc24f59a1653"
 # pages_to_fetch = [0, 1, 5]
 # contents = get_book_pages(book_id, pages_to_fetch)
-# for i, content in zip(pages_to_fetch, contents):
-#     print(f"\n📄 Page {i} Content:\n{content}")
+
+# book_ids = get_books_ids()
+
+
+
+
+
 
 
