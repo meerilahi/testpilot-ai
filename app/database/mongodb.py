@@ -1,8 +1,11 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson.binary import Binary
-from langchain.document_loaders import PyMuPDFLoader
+from langchain_community.document_loaders import PyMuPDFLoader
 import re
+import fitz
+from bson import Binary
+from io import BytesIO
 
 uri = "mongodb+srv://test123:test123@fastapi-course.sdltkxc.mongodb.net/?retryWrites=true&w=majority&appName=FASTAPI-COURSE"
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -16,31 +19,28 @@ def get_answer_sheets_collection():
     collection = db["answersheets"]
     return collection
 
-def add_answer_sheet(file_path, name):
-    answer_sheets_colletion = get_answer_sheets_collection()
-    with open(file_path, "rb") as f:
-        binary_data = Binary(f.read())
-        result = answer_sheets_colletion.insert_one({
-            "id": name,
-            "file_data": binary_data,
-            "content_type": "application/pdf"
-        })
+def add_answer_sheet(pdf_stream, name):
+    answer_sheets_collection = get_answer_sheets_collection()
+    binary_data = Binary(pdf_stream.read())
+    result = answer_sheets_collection.insert_one({
+        "id": name,
+        "file_data": binary_data,
+        "content_type": "application/pdf"
+    })
     return result.inserted_id
 
-def get_answer_sheet(id, output_path):
+def get_answer_sheet(id):
     answer_sheets_colletion = get_answer_sheets_collection()
     doc = answer_sheets_colletion.find_one({"id": id})    
-    with open(output_path, "wb") as f:
-        f.write(doc["file_data"])
+    file_data = doc["file_data"]
+    pdf_stream = BytesIO(file_data)
+    pdf_doc = fitz.open(stream=pdf_stream, filetype="pdf")
+    return pdf_doc
 
 def delete_answer_sheet(id):
     answer_sheets_colletion = get_answer_sheets_collection()
     result = answer_sheets_colletion.delete_one({"id": id})
     return result.deleted_count
-
-# add_answer_sheet("app/database/data/test.pdf", "test")
-# get_answer_sheet("test", "app/database/data/test2.pdf")
-# delete_answer_sheet("test")
 
 
 def get_books_collection():
@@ -81,8 +81,14 @@ def delete_book(id):
     result = books_collection.delete_many({"page_id": {"$regex": f"^book-{id}-page-"}})
     return result.deleted_count
 
+# with open("app/database/data/sheet.pdf", "rb") as file:
+#     pdf_stream = BytesIO(file.read())
+# inserted_id = add_answer_sheet(pdf_stream, name="student_123")
+# print(f"PDF inserted into MongoDB with ID: {inserted_id}")
 
-# add_book("app/database/data/test2.pdf", "test2")
-# print(get_book_pages("test2", [0, 1, 2]))
-# print(get_books_ids())
-# delete_book("test2")
+
+# pdf_doc = get_answer_sheet("student_123")
+# page = pdf_doc[0]
+# pix = page.get_pixmap()
+# pix.save("first_page_preview.png")
+# print(f"PDF has {len(pdf_doc)} pages.")

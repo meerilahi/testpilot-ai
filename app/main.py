@@ -11,13 +11,13 @@ async def generate_paper(paperRequest: GenerateQuestionPaperRequest) -> Generate
     """
     Generate a question paper based on the provided syllabus and requirements.
     """
-    paperResponse = await generate_question_paper_service(paperRequest)
-    return paperResponse
+    response = await generate_question_paper_service(paperRequest)
+    return response
 
 @app.post("/mark_answer_sheet")
 async def mark_answer_sheet(request :MarkAnswerSheetRequest) -> MarkAnswerSheetResponse:
     """
     Mark the answer sheet based on the provided answer key and student answers.
     """
-    mark_answer_sheet_service = await mark_answer_sheet_service(request)
-    return mark_answer_sheet_service
+    response = await mark_answer_sheet_service(request)
+    return response

@@ -1,9 +1,8 @@
 from pydantic import BaseModel, Field
-from typing import List, Dict, Tuple
-from typing import Annotated, Optional
+from typing import List, Annotated, Optional
 
 
-class QuestionRubic(BaseModel):
+class Question(BaseModel):
     number: Annotated[int, "The question number in the paper"]
     type: Annotated[str, "The type of question (e.g., MCQ, short answer, long answer)"]
     question: Annotated[str, "The question text"]
@@ -13,7 +12,7 @@ class QuestionRubic(BaseModel):
     grammer_weight: Annotated[float, "The weightage of grammar in the question"]
 
 class MarkAnswerSheetRequest(BaseModel):
-    questions_rubic: Annotated[List[QuestionRubic], "List of questions in the question paper"]
+    questions: Annotated[List[Question], "List of questions in the question paper"]
     id: Annotated[str, "The id of answersheet to be marked"]
 
 
