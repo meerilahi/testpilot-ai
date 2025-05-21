@@ -34,8 +34,7 @@ def get_answer_sheet(id):
     doc = answer_sheets_colletion.find_one({"id": id})    
     file_data = doc["file_data"]
     pdf_stream = BytesIO(file_data)
-    pdf_doc = fitz.open(stream=pdf_stream, filetype="pdf")
-    return pdf_doc
+    return pdf_stream
 
 def delete_answer_sheet(id):
     answer_sheets_colletion = get_answer_sheets_collection()
