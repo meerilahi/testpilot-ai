@@ -24,7 +24,6 @@ def add_answer_sheet(pdf_stream, name):
     existing = fs.find_one({"filename": name})
     if existing:
         fs.delete(existing._id)
-
     file_id = fs.put(pdf_stream.read(), filename=name, content_type="application/pdf")
     return file_id
 
@@ -83,13 +82,12 @@ def delete_book(id):
     result = books_collection.delete_many({"page_id": {"$regex": f"^book-{id}-page-"}})
     return result.deleted_count
 
-# print(os.getcwd())
 
-# with open("app/core/sheet.pdf", "rb") as file:
+# with open("app/core/answer_sheet.pdf", "rb") as file:
 #     pdf_stream = BytesIO(file.read())
-# inserted_id = add_answer_sheet(pdf_stream, name="taimoor")
+# inserted_id = add_answer_sheet(pdf_stream, name="biology")
 # print(f"PDF inserted into MongoDB with ID: {inserted_id}")
 
-# pdf_stream = get_answer_sheet("taimoor")
-# with open("downloaded.pdf", "wb") as f:
+# pdf_stream = get_answer_sheet("biology")
+# with open("answer_sheet2.pdf", "wb") as f:
 #     f.write(pdf_stream.read())

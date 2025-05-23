@@ -2,11 +2,6 @@ from mistralai import Mistral
 import os
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk
-from mistralai.models import OCRResponse
-import base64
-from IPython.display import Markdown, display
-from app.database.mongodb import get_answer_sheet
-from app.core.extract_pages import extract_pages_from_pdf
 
 
 load_dotenv()
