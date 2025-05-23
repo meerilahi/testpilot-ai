@@ -6,35 +6,42 @@ import re
 import fitz
 from bson import Binary
 from io import BytesIO
+import os
+from gridfs import GridFS
+
 
 uri = "mongodb+srv://test123:test123@fastapi-course.sdltkxc.mongodb.net/?retryWrites=true&w=majority&appName=FASTAPI-COURSE"
 client = MongoClient(uri, server_api=ServerApi('1'))
 
-def get_database():
+def get_db():
     db = client["testpilot-ai"]
     return db
 
 def get_answer_sheets_collection():
-    db = get_database()
+    db = get_db()
     collection = db["answersheets"]
     return collection
 
 def add_answer_sheet(pdf_stream, name):
-    answer_sheets_collection = get_answer_sheets_collection()
-    binary_data = Binary(pdf_stream.read())
-    result = answer_sheets_collection.insert_one({
-        "id": name,
-        "file_data": binary_data,
-        "content_type": "application/pdf"
-    })
-    return result.inserted_id
+    db = get_db()
+    fs = GridFS(db)
+    existing = fs.find_one({"filename": name})
+    if existing:
+        fs.delete(existing._id)
 
-def get_answer_sheet(id):
-    answer_sheets_colletion = get_answer_sheets_collection()
-    doc = answer_sheets_colletion.find_one({"id": id})    
-    file_data = doc["file_data"]
-    pdf_stream = BytesIO(file_data)
-    return pdf_stream
+    file_id = fs.put(pdf_stream.read(), filename=name, content_type="application/pdf")
+    return file_id
+
+# Retrieve a PDF file from GridFS
+def get_answer_sheet(name):
+    db = get_db()
+    fs = GridFS(db)
+
+    file = fs.find_one({"filename": name})
+    if not file:
+        return None
+
+    return BytesIO(file.read())
 
 def delete_answer_sheet(id):
     answer_sheets_colletion = get_answer_sheets_collection()
@@ -43,7 +50,7 @@ def delete_answer_sheet(id):
 
 
 def get_books_collection():
-    db = get_database()
+    db = get_db()
     collection = db["books"]
     return collection
 
@@ -80,14 +87,13 @@ def delete_book(id):
     result = books_collection.delete_many({"page_id": {"$regex": f"^book-{id}-page-"}})
     return result.deleted_count
 
-# with open("app/database/data/sheet.pdf", "rb") as file:
+# print(os.getcwd())
+
+# with open("app/core/sheet.pdf", "rb") as file:
 #     pdf_stream = BytesIO(file.read())
-# inserted_id = add_answer_sheet(pdf_stream, name="student_123")
+# inserted_id = add_answer_sheet(pdf_stream, name="taimoor")
 # print(f"PDF inserted into MongoDB with ID: {inserted_id}")
 
-
-# pdf_doc = get_answer_sheet("student_123")
-# page = pdf_doc[0]
-# pix = page.get_pixmap()
-# pix.save("first_page_preview.png")
-# print(f"PDF has {len(pdf_doc)} pages.")
+pdf_stream = get_answer_sheet("taimoor")
+with open("downloaded.pdf", "wb") as f:
+    f.write(pdf_stream.read())

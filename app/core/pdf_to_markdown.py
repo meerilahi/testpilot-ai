@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from mistralai import DocumentURLChunk
+from app.database.mongodb import get_answer_sheet
 
 load_dotenv() 
 
@@ -26,11 +27,11 @@ def pdf_to_markdown(pdf_stream) -> str:
     markdowns.append(page.markdown)
   return "\n\n".join(markdowns)
 
-# sheet = get_answer_sheet("student_123")
-# markdown = pdf_to_markdown(sheet)
-# print(markdown)
-# with open("output.md", "w", encoding="utf-8") as f:
-#     f.write(markdown)
+sheet = get_answer_sheet("taimoor")
+markdown = pdf_to_markdown(sheet)
+print(markdown)
+with open("output.md", "w", encoding="utf-8") as f:
+    f.write(markdown)
 
 
     
