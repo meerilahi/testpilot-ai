@@ -2,6 +2,9 @@ from mistralai import Mistral
 import os
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk
+from app.database.mongodb import get_answer_sheet
+from app.core.crop_answer_sheet import crop_pdf_pages
+from app.core.extract_pages import extract_pages_from_pdf
 
 
 load_dotenv()
@@ -27,13 +30,24 @@ def ocr_answer_sheet(images_dict):
     return result
 
 
-# sheet =  get_answer_sheet("taimoor")
+# sheet =  get_answer_sheet("biology")
+
 # print("Data Retrived from database")
+
 # page_dict = {
-#     1: [2, 3],
-#     2: [7,8]
+#     1 : [0],
+#     2 : [1],
+#     3 : [2],
+#     4 : [3],
+#     5 : [4],
+#     6 : [5],
+#     7 : [6],
+#     8 : [7],
+#     9 : [8],
+#     10 : [1],
+
 # }
-# images_dict = extract_pages(sheet, page_dict)
+# images_dict = extract_pages_from_pdf(sheet, page_dict)
 # print("Images extracted from pdf")
 # ocr_result = ocr_answer_sheet(images_dict)
 # print(ocr_result)
