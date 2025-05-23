@@ -5,7 +5,7 @@ from collections import defaultdict
 from pdf2image import convert_from_bytes
 from PIL import Image
 
-def extract_pages(pdf_stream: BinaryIO, page_dict: Dict[int, List[int]]) -> Dict[int, List[str]]:
+def extract_pages_from_pdf(pdf_stream: BinaryIO, page_dict: Dict[int, List[int]]) -> Dict[int, List[str]]:
     all_pages = convert_from_bytes(pdf_stream.read())
     result = defaultdict(list)
     for key, pages in page_dict.items():

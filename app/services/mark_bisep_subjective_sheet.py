@@ -1,20 +1,20 @@
-from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
+from app.schemas.mark_bisep_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
 from app.database.mongodb import get_answer_sheet
-from app.utils.extract_pages import extract_pages
+from app.core.extract_pages import extract_pages_from_pdf
 from app.core.ocr_answer_sheet import ocr_answer_sheet
 
 
 
 
 
-def mark_subjective_sheet_service(request :MarkSubjectiveSheetRequest)-> MarkSubjectiveSheetResponse:
+def mark_bisep_subjective_sheet_service(request :MarkSubjectiveSheetRequest)-> MarkSubjectiveSheetResponse:
     
     # get scanned answer sheet from database
     sheet = get_answer_sheet("taimoor")
 
     # extract answer pages from answer sheet
     page_dict = {q.question_number: q.pages for q in request.list_of_questions}
-    images_dict = extract_pages(sheet, page_dict)
+    images_dict = extract_pages_from_pdf(sheet, page_dict)
 
     # ocr each answer
     ocr_result = ocr_answer_sheet(images_dict)

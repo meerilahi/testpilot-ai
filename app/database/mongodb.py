@@ -1,12 +1,8 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from bson.binary import Binary
 from langchain_community.document_loaders import PyMuPDFLoader
 import re
-import fitz
-from bson import Binary
 from io import BytesIO
-import os
 from gridfs import GridFS
 
 
@@ -32,7 +28,7 @@ def add_answer_sheet(pdf_stream, name):
     file_id = fs.put(pdf_stream.read(), filename=name, content_type="application/pdf")
     return file_id
 
-# Retrieve a PDF file from GridFS
+
 def get_answer_sheet(name):
     db = get_db()
     fs = GridFS(db)
@@ -94,6 +90,6 @@ def delete_book(id):
 # inserted_id = add_answer_sheet(pdf_stream, name="taimoor")
 # print(f"PDF inserted into MongoDB with ID: {inserted_id}")
 
-pdf_stream = get_answer_sheet("taimoor")
-with open("downloaded.pdf", "wb") as f:
-    f.write(pdf_stream.read())
+# pdf_stream = get_answer_sheet("taimoor")
+# with open("downloaded.pdf", "wb") as f:
+#     f.write(pdf_stream.read())

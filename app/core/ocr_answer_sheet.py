@@ -6,7 +6,7 @@ from mistralai.models import OCRResponse
 import base64
 from IPython.display import Markdown, display
 from app.database.mongodb import get_answer_sheet
-from app.utils.extract_pages import extract_pages
+from app.core.extract_pages import extract_pages_from_pdf
 
 
 load_dotenv()
@@ -17,7 +17,7 @@ def ocr_answer_sheet(images_dict):
     print("Performing OCR")    
     result = {}
     for index, page_images in images_dict.items():
-        print('     Page {index} ---------')
+        print(f'     Page {index} ---------')
         markdowns = []
         images = []
         result[index] = {}
