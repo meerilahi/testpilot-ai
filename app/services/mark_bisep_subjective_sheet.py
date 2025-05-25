@@ -1,15 +1,23 @@
+import os
+import base64
+from PIL import Image
+from io import BytesIO
+from typing import Dict, List
 from app.schemas.mark_bisep_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
 from app.database.mongodb import get_answer_sheet
 from app.core.extract_pages import extract_pages_from_pdf
-from app.core.ocr_answer_sheet import ocr_answer_sheet
+from app.core.ocr_answer_sheet import ocr_answer_sheet, write_ocr_to_markdown
 from app.core.mark_answer_sheet import mark_answer_sheet
 from app.core.crop_answer_sheet import crop_pdf_pages
 from app.core.filter_attempted import filter_attempted_questions
+from sample_request import sample_request
+
+
 
 def mark_bisep_subjective_sheet_service(request :MarkSubjectiveSheetRequest)-> MarkSubjectiveSheetResponse:
     
     # get scanned answer sheet from database
-    sheet_stream = get_answer_sheet("biology")
+    sheet_stream = get_answer_sheet(request.answer_sheet_id)
     print("Answer Sheet Retrived from database!")
     print("************************************")
     # crop answer sheet
@@ -30,22 +38,27 @@ def mark_bisep_subjective_sheet_service(request :MarkSubjectiveSheetRequest)-> M
     # filter attempted questions
     filter_qns = filter_attempted_questions(ocr_result)
     print("Attempted Questions Filtered!")
-    print("************************************")
+    # print("************************************")
 
     # get rubric marks for each question
     mark_sheet = mark_answer_sheet(ocr_result, request, filter_qns)
     print("All Answer Sheet Marked!")
     print("************************************")
 
-    # prepare response object
-    response = MarkSubjectiveSheetResponse()
+    print(mark_sheet)
+
+    # # prepare response object
+    # response = MarkSubjectiveSheetResponse()
     
     # return response
     return None
 
 
 
+mark_bisep_subjective_sheet_service(sample_request)
 
-request = MarkSubjectiveSheetRequest()
 
-mark_bisep_subjective_sheet_service(request)
+
+
+
+

@@ -28,19 +28,19 @@ def crop_pdf_pages(
     return output_stream
 
 
-with open("app/core/answer_sheet.pdf", "rb") as f:
-    input_stream = BytesIO(f.read())
+# with open("app/core/answer_sheet.pdf", "rb") as f:
+#     input_stream = BytesIO(f.read())
 
-cropped_stream = crop_pdf_pages(
-    input_stream, 
-    page_indices=list(range(3,30)), 
-    left=65, 
-    right=65, 
-    top=130, 
-    bottom=130
-)
+# cropped_stream = crop_pdf_pages(
+#     input_stream, 
+#     page_indices=list(range(3,30)), 
+#     left=65, 
+#     right=65, 
+#     top=130, 
+#     bottom=130
+# )
 
-# Save to file to inspect result
-with open("cropped_output.pdf", "wb") as f:
-    f.write(cropped_stream.getbuffer())
+# # Save to file to inspect result
+# with open("cropped_output.pdf", "wb") as f:
+#     f.write(cropped_stream.getbuffer())
 

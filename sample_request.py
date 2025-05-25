@@ -1,13 +1,13 @@
 import base64
 from app.schemas.mark_bisep_subjective_sheet import QuestionRequest, MarkSubjectiveSheetRequest
 
-with open("app/schemas/d6.png", "rb") as image_file:
+with open("d6.png", "rb") as image_file:
     d6 = base64.b64encode(image_file.read()).decode('utf-8')   
-with open("app/schemas/d7.png", "rb") as image_file:
+with open("d7.png", "rb") as image_file:
     d7 = base64.b64encode(image_file.read()).decode('utf-8')    
-with open("app/schemas/d11.png", "rb") as image_file:
+with open("d11.png", "rb") as image_file:
     d11 = base64.b64encode(image_file.read()).decode('utf-8')  
-with open("app/schemas/d14.png", "rb") as image_file:
+with open("d14.png", "rb") as image_file:
     d14 = base64.b64encode(image_file.read()).decode('utf-8')    
 
 question_list =  [
@@ -273,5 +273,12 @@ question_list =  [
     ),
 ]    
 
-
-print("Done")
+sample_request = MarkSubjectiveSheetRequest(
+    list_of_questions = question_list,
+    sectionB_questions = 8,
+    sectionC_questions=3,
+    total_paper_marks =53,
+    answer_sheet_id = "biology",
+    language = "English",
+    subject = "Biology"
+)

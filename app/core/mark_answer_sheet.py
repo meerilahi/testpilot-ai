@@ -9,7 +9,6 @@ from typing import List, Tuple, Optional, Dict, Any
 load_dotenv()
 
 client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
-
 def mark_answer(
     answer_text: str,
     diagram_image: Optional[str],
@@ -80,7 +79,7 @@ def mark_answer_sheet(ocr_result, request:MarkSubjectiveSheetRequest, filter_qns
     mark_sheet = {}
     
     for qn in filter_qns:
-        marks_dict = mark_answer(ocr_result[qn], answer_keys[qn], diagram_keys[qn], rubrics[qn], question_marks[qn])
+        marks_dict = mark_answer(ocr_result[qn]['markdown'], None, answer_keys[qn], diagram_keys[qn], rubrics[qn], question_marks[qn])
         mark_sheet[qn] = marks_dict
         
     return mark_sheet
