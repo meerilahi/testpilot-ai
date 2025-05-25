@@ -1,6 +1,6 @@
 import re
 
-def is_fill_images(encoded_image):
+def is_fill_image(encoded_image):
     return False
 
 
@@ -13,7 +13,7 @@ def filter_attempted_questions(ocr_result: dict) -> list[int]:
     # ]
     
     # attempted_questions = []
-    
+
     # for question_no, content in ocr_result.items():
         
     #     markdown = content["markdown"]
@@ -24,8 +24,8 @@ def filter_attempted_questions(ocr_result: dict) -> list[int]:
     #         attempted_questions.append(question_no)
     #         continue
 
-    #     images = content["images"]
-    #     if is_fill_images(images):
+    #     images = content["image"]
+    #     if is_fill_image(images):
     #         attempted_questions.append(question_no)
     #         continue
     

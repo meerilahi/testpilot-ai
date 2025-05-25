@@ -83,9 +83,9 @@ def delete_book(id):
     return result.deleted_count
 
 
-# with open("app/core/answer_sheet.pdf", "rb") as file:
+# with open("temp_data/answer_sheet2.pdf", "rb") as file:
 #     pdf_stream = BytesIO(file.read())
-# inserted_id = add_answer_sheet(pdf_stream, name="biology")
+# inserted_id = add_answer_sheet(pdf_stream, name="biology2")
 # print(f"PDF inserted into MongoDB with ID: {inserted_id}")
 
 # pdf_stream = get_answer_sheet("biology")

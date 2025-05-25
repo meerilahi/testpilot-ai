@@ -31,17 +31,12 @@ def mark_answer(
     Answer Key:
     {answer_key or "Not Provided"}
 
-    Expected Diagram (if applicable):
-    {diagram_key or "Not Provided"}
-
     Rubrics:
     {rubric_str}
 
     Student Answer:
     {answer_text}
 
-    Student Diagram (if applicable):
-    {diagram_image or "Not Provided"}
 
     Now:
     1. Evaluate each rubric point and assign marks with a short justification.
@@ -57,11 +52,18 @@ def mark_answer(
     - 'feedback': a summary string.
     """
 
+    diagram_image_url = f"data:image/jpeg;base64,{diagram_image}"
+    diagram_key_url = f"data:image/jpeg;base64,{diagram_key}"
+
     response = client.chat.complete(
         model="pixtral-12b-latest", 
         messages=[
             { "role":"system", "content":"You are an expert exam evaluator."},
-            { "role": "user", "content": [TextChunk(text=prompt)] }
+            { "role": "user", "content": [
+                TextChunk(text=prompt),
+                ImageURLChunk(image_url=diagram_image_url),
+                ImageURLChunk(image_url=diagram_key_url)
+            ] }
         ],
         temperature=0,
         response_format =  {"type": "json_object"}
@@ -79,7 +81,12 @@ def mark_answer_sheet(ocr_result, request:MarkSubjectiveSheetRequest, filter_qns
     mark_sheet = {}
     
     for qn in filter_qns:
-        marks_dict = mark_answer(ocr_result[qn]['markdown'], None, answer_keys[qn], diagram_keys[qn], rubrics[qn], question_marks[qn])
+        marks_dict = mark_answer(answer_text=ocr_result[qn]['markdown'], diagram_image=ocr_result[qn]['image'],  answer_key=answer_keys[qn], diagram_key=diagram_keys[qn], rubric=rubrics[qn], marks=question_marks[qn])
         mark_sheet[qn] = marks_dict
-        
     return mark_sheet
+
+
+    # Expected Diagram (if applicable):
+    # {diagram_key or "Not Provided"}
+    # Student Diagram (if applicable):
+    # {diagram_image or "Not Provided"}

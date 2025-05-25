@@ -3,6 +3,7 @@ from app.schemas.generate_question_paper import GenerateQuestionPaperRequest, Ge
 from app.services.generate_question_paper import generate_question_paper_service
 from app.services.mark_bisep_subjective_sheet import mark_bisep_subjective_sheet_service
 from app.schemas.mark_bisep_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
+from temp_data.sample_request import sample_request
 
 app = FastAPI()
 
@@ -21,3 +22,5 @@ async def mark_answer_sheet(request :MarkSubjectiveSheetRequest) -> MarkSubjecti
     """
     response = await mark_bisep_subjective_sheet_service(request)
     return response
+
+sample_response = mark_answer_sheet(sample_request)

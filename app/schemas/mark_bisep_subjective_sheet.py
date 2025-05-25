@@ -26,15 +26,16 @@ class MarkSubjectiveSheetRequest(BaseModel):
 
 class QuestionResponse(BaseModel):
     question_number : Annotated[int, "Number of Question in question Paper"]
-    rubrics_marks: Annotated[List[Tuple[int,str]], "List of marks awarded for each rubrics"]
-    presentation_score: Annotated[int, "Higher if good presentation presentation of answer "]
+    rubrics_marks: Annotated[List[Tuple[float,str]], "List of marks awarded for each rubrics"]
+    presentation_score: Annotated[float, "Higher if good presentation presentation of answer "]
     grammer_score: Annotated[float, "Higher if good presentation presentation of answer"]
-    diagram_marks: Annotated[Optional[int], "Marks awarded for diagram"]
-    total_marks: Annotated[int, "Total Marks for Awarded for Answer"]
+    feedback: Annotated[Optional[str], "Feedback on answer"]
+    total_marks: Annotated[float, "Total Marks for Awarded for Answer"]
 
 
 class MarkSubjectiveSheetResponse(BaseModel):
     list_of_questions: Annotated[List[QuestionResponse], "List of questions in questin marks"]
-    total_paper_marks : Annotated[int, "Total Marks awarded to subjective answer sheet"]
+    total_paper_marks : Annotated[float, "Total Marks awarded to subjective answer sheet"]
+
 
 
