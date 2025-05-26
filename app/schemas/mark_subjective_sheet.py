@@ -14,8 +14,8 @@ class QuestionRequest(BaseModel):
 
 class MarkSubjectiveSheetRequest(BaseModel):
     list_of_questions: Annotated[List[QuestionRequest], "List of questions in subjective paper"]
-    rrq_questions: Annotated[int, "Number of RRQ Questions to be attempted"]
-    erq_questions: Annotated[int, "Number of ERQ Questions to be attempted"]
+    rrq_attempts: Annotated[int, "Number of RRQ Questions to be attempted"]
+    erq_attempts: Annotated[int, "Number of ERQ Questions to be attempted"]
     total_paper_marks : Annotated[float, "Total Marks of the subjective paper"]
     language: Annotated[str, "Language of Answer Sheet"]
     subject: Annotated[str, "Subject of Answer Sheet"]

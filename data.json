@@ -471,8 +471,8 @@
       "question_marks": 7.0
     }
   ],
-  "rrq_questions": 8,
-  "erq_questions": 3,
+  "rrq_attempts": 3,
+  "erq_attempts": 1,
   "total_paper_marks": 53.0,
   "language": "English",
   "subject": "Biology"

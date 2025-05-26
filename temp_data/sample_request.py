@@ -261,8 +261,8 @@ question_list =  [
 
 sample_request = MarkSubjectiveSheetRequest(
     list_of_questions = question_list,
-    rrq_questions = 8,
-    erq_questions=3,
+    rrq_attempts = 8,
+    erq_attempts=3,
     total_paper_marks =53,
     language = "English",
     subject = "Biology"

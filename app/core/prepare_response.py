@@ -1,4 +1,4 @@
-from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetResponse, QuestionResponse
+from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetResponse, QuestionResponse,MarkSubjectiveSheetRequest
 from typing import List, Dict, Any
 import json
 import base64
@@ -7,15 +7,14 @@ import os
 from typing import Dict, List
 from PIL import Image
 
-def convert_mark_sheet_to_response(mark_sheet) -> MarkSubjectiveSheetResponse:
+def convert_mark_sheet_to_response(mark_sheet, presentation_scores, request:MarkSubjectiveSheetRequest) -> MarkSubjectiveSheetResponse:
     question_responses = []
-    total_marks_awarded = 0.0
 
     for qn, mark_data in mark_sheet.items():
         rubrics_marks = mark_data.get("rubrics", [])
         marks_awarded = float(mark_data.get("marks", 0))
         feedback = mark_data.get("feedback", None)
-        presentation_score = 1.0
+        presentation_score = presentation_scores[qn]
         q_response = QuestionResponse(
             question_number=qn,
             rubrics_marks=rubrics_marks,
@@ -24,10 +23,17 @@ def convert_mark_sheet_to_response(mark_sheet) -> MarkSubjectiveSheetResponse:
             total_marks=marks_awarded
         )
         question_responses.append(q_response)
-        total_marks_awarded += marks_awarded
+    
+    # rrq_qns = [question.question_number for question in request.list_of_questions if question.q_type == "rrq"]
+    # erq_qns = [question.question_number for question in request.list_of_questions if question.q_type == "erq"]
+    # rrq_question_responses = sorted([qn for qn in question_responses if qn in rrq_qns], key=lambda x:x.total_marks)[request.rrq_attempts-1]
+    # erq_question_responses = sorted([qn for qn in question_responses if qn in erq_qns], key=lambda x:x.total_marks)[request.erq_attempts-1]
+    # attempted_response = rrq_question_responses + erq_question_responses
+    # total_marks_awarded = sum([res.total_marks for res in attempted_response])
+
     return MarkSubjectiveSheetResponse(
         list_of_questions=question_responses,
-        total_paper_marks=total_marks_awarded
+        total_paper_marks=0
     )
 
 

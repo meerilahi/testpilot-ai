@@ -5,6 +5,7 @@ from app.core.mark_answer_sheet import mark_answer_sheet
 from app.core.crop_answer_sheet import crop_pdf_pages
 from app.core.filter_attempted import filter_attempted_questions
 from app.core.prepare_response import convert_mark_sheet_to_response
+from app.core.presentation_score import get_presentation_score
 
 
 
@@ -26,13 +27,18 @@ def mark_subjective_sheet_service(request :MarkSubjectiveSheetRequest, sheet_str
     filter_qns = filter_attempted_questions(ocr_result)
     print("✅ 4. Attempted Questions Filtered")
 
+    # get presentation scores for all questions
+    presentation_scores = get_presentation_score(images_dict, filter_qns)
+    print("✅ 6. Presentation assessed for all attempted questions")
+
     # get rubric marks for each question
     mark_sheet = mark_answer_sheet(ocr_result, request, filter_qns)
-    print("✅ 5. All Answer Sheet Marked")
+    print("✅ 7. All Answer Sheet Marked")
 
     # # prepare response object
-    response_model = convert_mark_sheet_to_response(mark_sheet)
-    print("✅ 6. Response Object generated from Marked Sheet")
+    
+    response_model = convert_mark_sheet_to_response(mark_sheet,presentation_scores, request)
+    print("✅ 8. Response Object generated from Marked Sheet")
     
     return response_model
 
