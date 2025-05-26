@@ -3,7 +3,7 @@ import os
 import json
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk, TextChunk
-from app.schemas.mark_bisep_subjective_sheet import MarkSubjectiveSheetRequest
+from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest
 from typing import List, Tuple, Optional, Dict, Any
 
 load_dotenv()
@@ -15,6 +15,7 @@ def mark_answer(
     answer_key: Optional[str],
     diagram_key: Optional[str],
     rubric: List[Tuple[int, str]],
+    grammer_penalty:str,
     marks: int
     ) -> Dict[str, Any]:
 
@@ -34,6 +35,9 @@ def mark_answer(
     Rubrics:
     {rubric_str}
 
+    Grammer Penalty:
+    {grammer_penalty}
+
     Student Answer:
     {answer_text}
 
@@ -42,7 +46,7 @@ def mark_answer(
     1. Evaluate each rubric point and assign marks with a short justification.
     2. Return a list in this format:
         [(marks_awarded_for_point1, "justification 1"), ..., (marks_awarded_for_pointN, "justification N")]
-
+    3. Deduct marks from total if grammetical and spelling mistakes are present in the answer considering provided penality for grammetical mistakes. If Grammer Penalty is "No" then don't deduct marks.
     3. Return total marks out of {marks}.
     4. Return feedback summarizing what was missing or incorrect in the answer and diagram.
 
@@ -52,18 +56,21 @@ def mark_answer(
     - 'feedback': a summary string.
     """
 
-    diagram_image_url = f"data:image/jpeg;base64,{diagram_image}"
-    diagram_key_url = f"data:image/jpeg;base64,{diagram_key}"
+    message_chunks = [TextChunk(text=prompt)]
+
+    # def is_valid_base64_image(img: Optional[str]) -> bool:
+    #     return bool(img and isinstance(img, str) and img.strip() and img.lower() != "none")
+
+    # if is_valid_base64_image(diagram_image):
+    #     message_chunks.append(ImageURLChunk(image_url=f"data:image/jpeg;base64,{diagram_image}"))
+    # if is_valid_base64_image(diagram_key):
+    #     message_chunks.append(ImageURLChunk(image_url=f"data:image/jpeg;base64,{diagram_key}"))
 
     response = client.chat.complete(
         model="pixtral-12b-latest", 
         messages=[
             { "role":"system", "content":"You are an expert exam evaluator."},
-            { "role": "user", "content": [
-                TextChunk(text=prompt),
-                ImageURLChunk(image_url=diagram_image_url),
-                ImageURLChunk(image_url=diagram_key_url)
-            ] }
+            { "role": "user", "content": message_chunks }
         ],
         temperature=0,
         response_format =  {"type": "json_object"}
@@ -78,15 +85,11 @@ def mark_answer_sheet(ocr_result, request:MarkSubjectiveSheetRequest, filter_qns
     diagram_keys = {q.question_number : q.diagram_key  for q in request.list_of_questions}
     rubrics = {q.question_number : q.rubrics for q in request.list_of_questions}
     question_marks = {q.question_number : q.question_marks for q in request.list_of_questions }
+    grammer_penalties = {q.question_number : q.grammer_penalty for q in request.list_of_questions}
     mark_sheet = {}
     
     for qn in filter_qns:
-        marks_dict = mark_answer(answer_text=ocr_result[qn]['markdown'], diagram_image=ocr_result[qn]['image'],  answer_key=answer_keys[qn], diagram_key=diagram_keys[qn], rubric=rubrics[qn], marks=question_marks[qn])
+        print(f"Marking question no {qn}")
+        marks_dict = mark_answer(answer_text=ocr_result[qn]['markdown'], diagram_image=ocr_result[qn]['image'],  answer_key=answer_keys[qn], diagram_key=diagram_keys[qn], rubric=rubrics[qn], marks=question_marks[qn], grammer_penalty=grammer_penalties[qn])
         mark_sheet[qn] = marks_dict
     return mark_sheet
-
-
-    # Expected Diagram (if applicable):
-    # {diagram_key or "Not Provided"}
-    # Student Diagram (if applicable):
-    # {diagram_image or "Not Provided"}

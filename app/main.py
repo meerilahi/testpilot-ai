@@ -1,26 +1,45 @@
 from fastapi import FastAPI
 from app.schemas.generate_question_paper import GenerateQuestionPaperRequest, GenerateQuestionPaperResponse
 from app.services.generate_question_paper import generate_question_paper_service
-from app.services.mark_bisep_subjective_sheet import mark_bisep_subjective_sheet_service
-from app.schemas.mark_bisep_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
-from temp_data.sample_request import sample_request
+from app.services.mark_subjective_sheet import mark_subjective_sheet_service
+from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
+from fastapi import FastAPI, UploadFile, File, HTTPException, Form
+from io import BytesIO
 
 app = FastAPI()
 
 @app.post("/generate_question_paper", response_model=GenerateQuestionPaperResponse)
-async def generate_paper(paperRequest: GenerateQuestionPaperRequest) -> GenerateQuestionPaperResponse:
+async def generate_paper(
+    data: str = Form(...),
+    file: UploadFile = File(...)
+) -> GenerateQuestionPaperResponse:
     """
     Generate a question paper based on the provided syllabus and requirements.
     """
-    response = await generate_question_paper_service(paperRequest)
+    try:
+        paperRequest = GenerateQuestionPaperRequest.model_validate_json(data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON for request model: {e}")
+    contents = await file.read()
+    stream = BytesIO(contents)
+    response = generate_question_paper_service(paperRequest, stream)
     return response
 
-@app.post("/mark_bisep_subjective")
-async def mark_answer_sheet(request :MarkSubjectiveSheetRequest) -> MarkSubjectiveSheetResponse:
-    """
-    Mark the Bisep style subjective answer sheet based on rubrics.
-    """
-    response = await mark_bisep_subjective_sheet_service(request)
-    return response
 
-sample_response = mark_answer_sheet(sample_request)
+
+@app.post("/mark_bisep_subjective", response_model=MarkSubjectiveSheetResponse)
+async def mark_subjective_sheet(
+    data: str = Form(...),
+    file: UploadFile = File(...)
+) -> MarkSubjectiveSheetResponse:
+    """
+    Mark the subjective answer sheet based on rubrics.
+    """
+    try:
+        request = MarkSubjectiveSheetRequest.model_validate_json(data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON for request model: {e}")
+    contents = await file.read()
+    stream = BytesIO(contents)
+    response = mark_subjective_sheet_service(request, stream)
+    return response

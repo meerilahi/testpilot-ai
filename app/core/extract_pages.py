@@ -5,9 +5,7 @@ from typing import BinaryIO, Dict, List
 from collections import defaultdict
 from pdf2image import convert_from_bytes
 from PIL import Image
-from app.schemas.mark_bisep_subjective_sheet import MarkSubjectiveSheetRequest
-from temp_data.sample_request import sample_request
-from app.database.mongodb import get_answer_sheet
+from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest
 
 def extract_pages_from_pdf(pdf_stream: BinaryIO, request: MarkSubjectiveSheetRequest ) -> Dict[int, List[str]]:
     page_dict = {q.question_number:  q.pages for q in request.list_of_questions}

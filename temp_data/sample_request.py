@@ -1,5 +1,6 @@
 import base64
-from app.schemas.mark_bisep_subjective_sheet import QuestionRequest, MarkSubjectiveSheetRequest
+from app.schemas.mark_subjective_sheet import QuestionRequest, MarkSubjectiveSheetRequest
+import json
 
 with open("temp_data/d6.png", "rb") as image_file:
     d6 = base64.b64encode(image_file.read()).decode('utf-8')   
@@ -14,40 +15,37 @@ question_list =  [
     QuestionRequest(
     question_number = 1,
     pages = [4],
-    section = "B",
+    q_type = "rrq",
     question_text =  "Complete the organization level against each example : \n Examples Stomach \n Man \n Glucose \n Ribosome",
     answer_key = " Examples \t Organization Level \n Stomach \t Organ \n Man \t Organism \n Glucose \t Molecule \n Ribosome \t Organelles",
     rubrics = [(1,"Stomach to Organ"), (1,"Man is Organism"), (1,"Glucose is Molecule"), (1,"Ribosome is Organelles")],
-    presentation_weightage = 0,
-    grammer_weightage =  0,
+    grammer_penalty =  "Low",
     question_marks =  4,
     ),   
     QuestionRequest(
         question_number = 2,
         pages = [5],
-        section = "B",
+        q_type = "rrq",
         question_text =  "Briefly explain following four characteristics of kingdom Protista: a. Cell Type, b. Nuclear envelope, c. cell wall, d. mode of nutrition ",
         answer_key = " a. Cell type: Eukaryotic unicellular- colonial or simple multicellular \n b. Nuclear envelope: Present \n c. Cell wall: Present in some forms, various types \n d. Mode of nutrition: Photosynthetic or heterotrophic or combination of these.",
         rubrics = [(1,"Cell type: Eukaryotic unicellular- colonial or simple multicellular"), (1,"Nuclear envelope: Present"), (1," Cell wall: Present in some forms, various types"), (1,"Mode of nutrition: Photosynthetic or heterotrophic or combination of these")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 3,
         pages = [6],
-        section = "B",
+        q_type = "rrq",
         question_text =  "Write a short note on electron microscope keeping in view its radiation type, lenses, magnification and images.",
         answer_key = "Radiation type: Beams of electrons \n Lenses: Magnetic \n Magnification: 100 times greater than light \n Images: TEM shows 2D while SEM shows 3D images",
         rubrics = [(1,"Radiation type: Beams of electrons"), (1,"Lenses: Magnetic"), (1,"Magnification: 100 times greater than light"), (1,"Images: TEM shows 2D while SEM shows 3D images")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 4,
         pages = [7],
-        section = "B",
+        q_type = "rrq",
         question_text =  "Define turgor and write any TWO points to show its importance Textbook in plants.",
         answer_key = """ **Turgor:** The pressure which is exerted by the cytoplasm against the answer cell wall is known as turgor pressure and the phenomenon is called turgor.\n
         **Importance of turgor in plants**:\n
@@ -56,14 +54,13 @@ question_list =  [
         iii. It helps in closing and opening of the stomata.\n
         iv. Some flowers open during the day time and close at night. This is also due to change in turgor in the cells of sepals of flowers.""",
         rubrics = [(2,"Correct definition of turgor"), (1,"Correct Importance"), (1,"Correct Importance")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 5,
         pages = [8],
-        section = "B",
+        q_type = "rrq",
         question_text =  "How is a prokaryotic cell different from a eukaryotic cell in Textbook terms of nucleus, cell membrane, cell wall and size.",
         answer_key = """
         | Component           | Prokaryotic Cell                                                                 | Eukaryotic Cell                                                       |
@@ -74,26 +71,24 @@ question_list =  [
         | Size               | Comparatively smaller in size (0.5 µm)                                             | Larger in size (10–100 µm)                                            |
         """,
         rubrics = [(1,"Correct difference in Nucleus"), (1,"Correct difference in Membrane organelles"), (1,"Correct difference in Cell wall"), (1,"Correct difference in Size")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 6,
         pages = [9],
-        section = "B",
+        q_type = "rrq",
         question_text =  "Enlist the events (and show with diagram) through which mitotic apparatus is formed in prophase in animal cells",
         answer_key = """ i. In animal cell, when two parts of centrioles reach opposite answer pole of the cell. They make a network of spindle fibers betweenthe two poles. The complete set of spindle fiber forms mitotic apparatus. """,
         diagram_key = d6,
         rubrics = [(1,"Event : two parts of centrioles reach opposite pole of the cell"), (1,"Event : They make a network of spindle fibers between the two poles"), (2,"Correct Diagram")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 7,
         pages = [10],
-        section = "B",
+        q_type = "rrq",
         question_text =  "How are enzymes specific for their substrate? Justify it with the help of diagram of shape of active site of enzyme and its specificity. Also give its TWO examples.",
         answer_key = """ Examples:\n
         Enzyme protease: Speed up the digestion of protein only.\n
@@ -102,14 +97,13 @@ question_list =  [
         Enzyme lipase: Digests lipase only.""",
         diagram_key = d7,
         rubrics = [(2,"Diagram"), (1,"First correct example "), (1,"Second correct example ")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 8,
         pages = [11],
-        section = "B",
+        q_type = "rrq",
         question_text =  "How are enzymes specific for their substrate? Justify it with the help of diagram of shape of active site of enzyme and its specificity. Also give its TWO examples.",
         answer_key = """
         | Respiration | Photosynthesis |
@@ -124,14 +118,13 @@ question_list =  [
         | It occurs round the clock, day and night. It does not require sunlight. | It occurs during the daytime when sunlight is available which is necessary for it. |
         """,
         rubrics = [(1,"One Correct Difference"), (1,"One Correct Difference "), (1,"One Correct Difference"), (1,"One Correct Difference")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 9,
         pages = [12],
-        section = "B",
+        q_type = "rrq",
         question_text =  "Write any FOUR deficiency symptoms of vitamin D.",
         answer_key = """
         Deficiency symptoms of vitamin D:
@@ -144,14 +137,13 @@ question_list =  [
         Note: Any other related or correct deficiency symptom of vitamin D out of textbook may be considered.
         """,
         rubrics = [(1,"One Correct symptom"), (1,"One Correct symptom "), (1,"One Correct symptom"), (1,"One Correct symptom")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 10,
         pages = [13],
-        section = "B",
+        q_type = "rrq",
         question_text =  "List any FOUR functions of plasma in human body.",
         answer_key = """
         FUNCTIONS OF PLASMA IN HUMAN BODY:\n
@@ -164,28 +156,26 @@ question_list =  [
         7. Another plasma protein fibrinogen is responsible for blood clotting.\n
         """,
         rubrics = [(1,"One Correct Function"), (1,"One Correct Function "), (1,"One Correct Function"), (1,"One Correct Function")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 11,
         pages = [14],
-        section = "B",
+        q_type = "rrq",
         question_text =  "Why are arteries important? Draw a labelled diagram of artery.",
         answer_key = """
         IMPORTANCE OF ARTERIES.:
         All the arteries carry oxygenated blood from heart to other organ of the body except pulmonary arteries which carry deoxygenated blood to lungs.
         """,
         rubrics = [(2,"Correct explanation of importance"), (2,"Correct Diagram ")],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  4,
     ),
     QuestionRequest(
         question_number = 12,
         pages = [15,16,17,18],
-        section = "C",
+        q_type = "erq",
         question_text =  "i. Explain the applications of mathematics rules used in biology research work. ii. Define the term conservation. Write any THREE examples of the steps taken in Pakistan to conserve biodiversity.",
         answer_key = """
         i. APPLICATIONS OF MATHEMATICS RULES USED IN BIOLOGY RESEARCH WORK\n
@@ -208,14 +198,13 @@ question_list =  [
         • Ban on Bear-baiting in Pakistan\n
         """,
         rubrics = [(1,"one correct application of mathematics in biology"), (1,"one correct application of mathematics in biology"),(1,"one correct application of mathematics in biology"), (1,"one correct examples of steps"),(1,"one correct examples of steps"),(1,"one correct examples of steps") ],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  7,
     ),
     QuestionRequest(
         question_number = 13,
         pages = [19,20,21,22],
-        section = "C",
+        q_type = "erq",
         question_text =  "i. Briefly explain following animal tissues: a. Fibrous connective tissues, b. Smooth muscles, c. Nervous tissues, d. Epithelial tissue. ii. Define Cell Cycle and write names of its TWO main stages.",
         answer_key = """
         i. ANIMAL TISSUES\n
@@ -230,14 +219,13 @@ question_list =  [
         • Division phase (Mitosis or Meiosis) \n
         """,
         rubrics = [(1,"one correct brief description of given tissue"), (1,"one correct brief description of given tissue"),(1,"one correct brief description of given tissue"), (1,"one correct brief description of given tissue"), (1,"correct definition of cell cycle"), (1," correct name of one stage of cell cycle"), (1," correct name of one stage of cell cycle") ],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  7,
     ),
     QuestionRequest(
         question_number = 14,
         pages = [23,24,25,26],
-        section = "C",
+        q_type = "erq",
         question_text =  "i. Why is mitochondrial enzyme called intracellular? Give justification. ii. Explain the synthesis and breaking of ATP through ATP-ADP cycle with proper diagrams",
         answer_key = """
         i. Why is mitochondrial enzyme called intracellular?
@@ -248,14 +236,13 @@ question_list =  [
         """,
         rubrics = [(3,"Correct description of mitochondrial enzyme as intracellular of ATP"), (1,"Correct description of Synthesis of ATP"),(1,"Correct diagram of Synthesis"), (1,"Correct description of Breaking of ATP"), (1,"Correct diagram of Breaking of ATP") ],
         diagram_key = d14,
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  7,
     ),
     QuestionRequest(
         question_number = 15,
         pages = [27,28,29,30],
-        section = "C",
+        q_type = "erq",
         question_text =  "i. State symptoms, causes and preventions of the diarrhea. ii. Differentiate between Atherosclerosis and Arteriosclerosis",
         answer_key = """
         i. DIARRHEA :
@@ -267,18 +254,19 @@ question_list =  [
         Arteriosclerosis : It is the hardening of the arteries due to the deposition of calcium in the walls of the arteries. Such artery cannot expand when blood is pumped with pressure into it with systole. Due to this inflexibility makes the heart to work hard. This disorder occurs with increasing age. 
         """,
         rubrics = [(1, "Correct symptoms of diarrhea"), (1, "Correct causes of diarrhea"), (1, "Correct preventions of diarrhea"), (2, "Correct description (differences) of Atherosclerosis."), (2, "Correct description (differences) of Arteriosclerosis.") ],
-        presentation_weightage = 0,
-        grammer_weightage =  0,
+        grammer_penalty =  "Low",
         question_marks =  7,
     ),
 ]    
 
 sample_request = MarkSubjectiveSheetRequest(
     list_of_questions = question_list,
-    sectionB_questions = 8,
-    sectionC_questions=3,
+    rrq_questions = 8,
+    erq_questions=3,
     total_paper_marks =53,
-    answer_sheet_id = "biology2",
     language = "English",
     subject = "Biology"
 )
+
+with open("data.json", "w") as f:
+    json.dump(sample_request.model_dump(), f, indent=2)
