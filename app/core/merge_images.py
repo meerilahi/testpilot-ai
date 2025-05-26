@@ -12,7 +12,7 @@ def combine_base64_images(image_b64_list: List[str]) -> str:
             img = Image.open(BytesIO(image_data)).convert("RGB")
             images.append(img)
         except Exception as e:
-            print(f"⚠️ Failed to decode or open image: {e}")
+            print(f"Failed to decode or open image: {e}")
             continue
 
     if not images:
