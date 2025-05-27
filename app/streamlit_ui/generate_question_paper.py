@@ -1,6 +1,49 @@
 import streamlit as st
 import requests
 import json
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+import tempfile
+
+def generate_pdf(response_json) -> bytes:
+    buffer = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+    c = canvas.Canvas(buffer.name, pagesize=A4)
+    width, height = A4
+    margin = 40
+    y = height - margin
+
+    def draw_line(text, font_size=11, bold=False):
+        nonlocal y
+        if y < margin:
+            c.showPage()
+            y = height - margin
+        font_name = "Helvetica-Bold" if bold else "Helvetica"
+        c.setFont(font_name, font_size)
+        c.drawString(margin, y, text)
+        y -= 14
+
+    draw_line("Generated Question Paper", font_size=16, bold=True)
+    draw_line("-" * 80)
+
+    for q in response_json["list_of_question"]:
+        draw_line(f"Q{q['q_no']}. [{q['q_type']}] Chapter {q['chapter_no']} - {q['difficulty_level']} - {q['marks']} Marks", bold=True)
+        draw_line(f"Question: {q['question_text']}")
+        draw_line(f"Answer Key: {q['answer_key']}")
+        if q["options"]:
+            draw_line("Options:")
+            for idx, option in enumerate(q["options"], 1):
+                draw_line(f"  ({idx}) {option}")
+        if q["rubrics"]:
+            draw_line("Rubrics:")
+            for mark, criterion in q["rubrics"]:
+                draw_line(f"  {mark} marks: {criterion}")
+        draw_line("-" * 80)
+
+    c.save()
+    buffer.seek(0)
+    return buffer.read()
+
 
 st.title("📄 AI-Powered Question Paper Generator")
 
@@ -81,6 +124,9 @@ if st.button("🚀 Generate Question Paper"):
                     with open("generated_question_paper.json", "w") as f:
                         json.dump(result, f, indent=2)
                     st.success("Question Paper Generated Successfully!")
+                    # Generate PDF and store it in session state
+                    pdf_bytes = generate_pdf(result)
+                    st.session_state["question_paper_pdf"] = pdf_bytes
                 else:
                     st.error(f"Failed to generate paper: {res.status_code} - {res.text}")
             except Exception as e:
@@ -91,8 +137,7 @@ if "question_paper" in st.session_state:
     result = st.session_state["question_paper"]
 
     # Download button
-    st.download_button("📥 Download JSON", data=json.dumps(result, indent=2),
-                       file_name="generated_question_paper.json", mime="application/json")
+
 
     # Display questions
     for q in result["list_of_question"]:
@@ -110,3 +155,11 @@ if "question_paper" in st.session_state:
                 st.markdown(f"- {mark} marks: {criterion}")
         st.markdown("---")
 
+
+    st.download_button("📥 Download JSON", data=json.dumps(result, indent=2),
+                       file_name="generated_question_paper.json", mime="application/json")
+    
+    # PDF download
+    if "question_paper_pdf" in st.session_state:
+        st.download_button("📥 Download PDF", data=st.session_state["question_paper_pdf"],
+                        file_name="generated_question_paper.pdf", mime="application/pdf")

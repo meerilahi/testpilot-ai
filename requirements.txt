@@ -9,6 +9,7 @@ bleach==6.2.0
 blinker==1.9.0
 cachetools==5.5.2
 certifi==2025.4.26
+chardet==5.2.0
 charset-normalizer==3.4.2
 click==8.2.1
 decorator==5.2.1
@@ -75,6 +76,7 @@ pytz==2025.2
 PyYAML==6.0.2
 pyzmq==26.4.0
 referencing==0.36.2
+reportlab==4.4.1
 requests==2.32.3
 rich==14.0.0
 rich-toolkit==0.14.6
