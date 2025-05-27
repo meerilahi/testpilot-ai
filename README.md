@@ -1,13 +1,13 @@
 # 🧠 AI-Powered Exam System
 
-An AI-driven platform that generates question papers based on the syllabus and automatically grades students' scanned answer sheets using NLP, OCR, and machine learning techniques.
+An AI-driven platform that generates question papers based on the syllabus and automatically grades students' scanned answer sheets using OCR and LLMs.
 
 ---
 
 ## 🚀 Features
 
 - 📄 **Automatic Question Paper Generation**
-  - Generate custom question papers based on subject syllabus and topic distribution.
+  - Generate custom question papers based on subject syllabus, provided format and topic distribution.
 
 - 🧠 **Intelligent Answer Sheet Grading**
   - Extract answers from scanned sheets using OCR.
