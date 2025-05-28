@@ -20,23 +20,27 @@
       "q_no": 2,
       "q_type": "RRQ",
       "chapter_no": 1,
-      "difficulty_level": "Easy",
-      "marks": 3.0,
-      "question_text": "What are the main components of the learning process in machine learning?",
-      "answer_key": "The main components of the learning process in machine learning are data storage, abstraction, generalization, and evaluation.",
+      "difficulty_level": "Hard",
+      "marks": 4.0,
+      "question_text": "Compare and contrast the concepts of 'supervised learning' and 'unsupervised learning' in machine learning. Provide examples of each and discuss their applications and limitations.",
+      "answer_key": "Supervised learning involves training a model on labeled data, where the correct responses are provided. Examples include classification and regression problems. Unsupervised learning, on the other hand, involves identifying patterns and structures in unlabeled data. Examples include clustering and association. Applications of supervised learning include spam detection and image classification, while unsupervised learning is used in customer segmentation and anomaly detection. Limitations include the need for labeled data in supervised learning and the difficulty in interpreting results in unsupervised learning.",
       "options": [],
       "rubrics": [
         [
           1.0,
-          "Identify at least one component of the learning process."
+          "Define supervised learning and provide an example."
         ],
         [
-          2.0,
-          "Identify at least two components of the learning process."
+          1.0,
+          "Define unsupervised learning and provide an example."
         ],
         [
-          3.0,
-          "Identify all four components of the learning process."
+          1.0,
+          "Discuss the applications of supervised learning."
+        ],
+        [
+          1.0,
+          "Discuss the limitations of unsupervised learning."
         ]
       ]
     },
