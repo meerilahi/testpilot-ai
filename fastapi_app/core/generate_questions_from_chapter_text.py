@@ -1,4 +1,4 @@
-from app.schemas.generate_question_paper import QuestionRequest, QuestionResponse
+from schemas.generate_question_paper import QuestionRequest, QuestionResponse
 from mistralai import Mistral
 from mistralai import  TextChunk
 from typing import List
@@ -50,7 +50,7 @@ def generate_questions_from_chapter_text(
                 {"role": "system", "content": "You are an AI teacher assistant."},
                 {"role": "user", "content": [TextChunk(text=prompt)]}
             ],
-            temperature=0,
+            temperature=0.6,
             response_format={"type": "json_object"}
         )
 

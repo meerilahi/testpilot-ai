@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from app.schemas.generate_question_paper import GenerateQuestionPaperRequest, GenerateQuestionPaperResponse
-from app.services.generate_question_paper import generate_question_paper_service
-from app.services.mark_subjective_sheet import mark_subjective_sheet_service
-from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
+from schemas.generate_question_paper import GenerateQuestionPaperRequest, GenerateQuestionPaperResponse
+from services.generate_question_paper import generate_question_paper_service
+from services.mark_subjective_sheet import mark_subjective_sheet_service
+from schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from io import BytesIO
 

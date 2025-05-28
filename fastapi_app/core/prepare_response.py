@@ -1,4 +1,4 @@
-from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetResponse, QuestionResponse,MarkSubjectiveSheetRequest
+from schemas.mark_subjective_sheet import MarkSubjectiveSheetResponse, QuestionResponse,MarkSubjectiveSheetRequest
 from typing import List, Dict, Any
 import json
 import base64

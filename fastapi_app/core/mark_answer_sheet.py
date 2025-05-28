@@ -3,7 +3,7 @@ import os
 import json
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk, TextChunk
-from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest
+from schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest
 from typing import List, Tuple, Optional, Dict, Any
 
 load_dotenv()

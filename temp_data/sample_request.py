@@ -1,5 +1,5 @@
 import base64
-from app.schemas.mark_subjective_sheet import QuestionRequest, MarkSubjectiveSheetRequest
+from fastapi_app.schemas.mark_subjective_sheet import QuestionRequest, MarkSubjectiveSheetRequest
 import json
 
 with open("temp_data/d6.png", "rb") as image_file:

@@ -1,11 +1,11 @@
-from app.schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
-from app.core.extract_pages import extract_pages_from_pdf
-from app.core.ocr_answer_sheet import ocr_answer_sheet
-from app.core.mark_answer_sheet import mark_answer_sheet
-from app.core.crop_answer_sheet import crop_pdf_pages
-from app.core.filter_attempted import filter_attempted_questions
-from app.core.prepare_response import convert_mark_sheet_to_response
-from app.core.presentation_score import get_presentation_score
+from schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
+from core.extract_pages import extract_pages_from_pdf
+from core.ocr_answer_sheet import ocr_answer_sheet
+from core.mark_answer_sheet import mark_answer_sheet
+from core.crop_answer_sheet import crop_pdf_pages
+from core.filter_attempted import filter_attempted_questions
+from core.prepare_response import convert_mark_sheet_to_response
+from core.presentation_score import get_presentation_score
 
 
 

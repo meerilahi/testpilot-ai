@@ -1,7 +1,7 @@
-from app.schemas.generate_question_paper import GenerateQuestionPaperRequest, GenerateQuestionPaperResponse,QuestionRequest, QuestionResponse
+from schemas.generate_question_paper import GenerateQuestionPaperRequest, GenerateQuestionPaperResponse,QuestionRequest, QuestionResponse
 from PyPDF2 import PdfReader
 from typing import List
-from app.core.generate_questions_from_chapter_text import generate_questions_from_chapter_text
+from core.generate_questions_from_chapter_text import generate_questions_from_chapter_text
 
 def extract_text_from_pages(pdf_stream, start_page: int, end_page: int) -> str:
     reader = PdfReader(pdf_stream)

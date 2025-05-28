@@ -3,7 +3,7 @@ import os
 import base64
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk
-from app.core.merge_images import combine_base64_images
+from core.merge_images import combine_base64_images
 
 load_dotenv()
 
