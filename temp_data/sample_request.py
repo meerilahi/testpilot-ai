@@ -1,5 +1,5 @@
 import base64
-from fastapi_app.schemas.mark_subjective_sheet import QuestionRequest, MarkSubjectiveSheetRequest
+from fastapi_app.schemas.mark_subjective_answersheet import QuestionRequest, MarkSubjectiveAnswerSheetRequest
 import json
 
 with open("temp_data/d6.png", "rb") as image_file:
@@ -259,7 +259,7 @@ question_list =  [
     ),
 ]    
 
-sample_request = MarkSubjectiveSheetRequest(
+sample_request = MarkSubjectiveAnswerSheetRequest(
     list_of_questions = question_list,
     rrq_attempts = 8,
     erq_attempts=3,

@@ -1,4 +1,4 @@
-from schemas.mark_subjective_sheet import MarkSubjectiveSheetResponse, QuestionResponse,MarkSubjectiveSheetRequest
+from fastapi_app.schemas.mark_subjective_answersheet import MarkSubjectiveAnswerSheetResponse, QuestionResponse,MarkSubjectiveAnswerSheetRequest
 from typing import List, Dict, Any
 import json
 import base64
@@ -7,7 +7,7 @@ import os
 from typing import Dict, List
 from PIL import Image
 
-def convert_mark_sheet_to_response(mark_sheet, presentation_scores, request:MarkSubjectiveSheetRequest) -> MarkSubjectiveSheetResponse:
+def prepare_response(mark_sheet, student_id, presentation_scores, request:MarkSubjectiveAnswerSheetRequest) -> MarkSubjectiveAnswerSheetResponse:
     question_responses = []
 
     for qn, mark_data in mark_sheet.items():
@@ -31,8 +31,9 @@ def convert_mark_sheet_to_response(mark_sheet, presentation_scores, request:Mark
     # attempted_response = rrq_question_responses + erq_question_responses
     # total_marks_awarded = sum([res.total_marks for res in attempted_response])
 
-    return MarkSubjectiveSheetResponse(
-        list_of_questions=question_responses,
+    return MarkSubjectiveAnswerSheetResponse(
+        student_id=student_id,
+        list_of_attempted_questions=question_responses,
         total_paper_marks=0
     )
 

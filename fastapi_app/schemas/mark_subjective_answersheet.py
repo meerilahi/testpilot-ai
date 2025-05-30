@@ -12,14 +12,13 @@ class QuestionRequest(BaseModel):
     grammer_penalty: Annotated[str, "No, Low, Medium or High means how much should penalize grammetical mistakes."]
     question_marks: Annotated[float, "Total Marks for Question"]
 
-class MarkSubjectiveSheetRequest(BaseModel):
+class MarkSubjectiveAnswerSheetRequest(BaseModel):
     list_of_questions: Annotated[List[QuestionRequest], "List of questions in subjective paper"]
     rrq_attempts: Annotated[int, "Number of RRQ Questions to be attempted"]
     erq_attempts: Annotated[int, "Number of ERQ Questions to be attempted"]
     total_paper_marks : Annotated[float, "Total Marks of the subjective paper"]
     language: Annotated[str, "Language of Answer Sheet"]
     subject: Annotated[str, "Subject of Answer Sheet"]
-
 
 
 class QuestionResponse(BaseModel):
@@ -29,8 +28,9 @@ class QuestionResponse(BaseModel):
     feedback: Annotated[Optional[str], "Feedback on answer"]
     total_marks: Annotated[float, "Total Marks for Awarded for Answer"]
 
-class MarkSubjectiveSheetResponse(BaseModel):
-    list_of_questions: Annotated[List[QuestionResponse], "List of questions in questin marks"]
+class MarkSubjectiveAnswerSheetResponse(BaseModel):
+    student_id: Annotated[int, "ID of Student"]
+    list_of_attempted_questions: Annotated[List[QuestionResponse], "List of questions"]
     total_paper_marks : Annotated[float, "Total Marks awarded to subjective answer sheet"]
 
 

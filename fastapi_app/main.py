@@ -1,45 +1,67 @@
 from fastapi import FastAPI
-from schemas.generate_question_paper import GenerateQuestionPaperRequest, GenerateQuestionPaperResponse
-from services.generate_question_paper import generate_question_paper_service
-from services.mark_subjective_sheet import mark_subjective_sheet_service
-from schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest, MarkSubjectiveSheetResponse
+from fastapi_app.services.mark_subjective_answersheet import mark_subjective_answersheet_service
+from fastapi_app.services.generate_objective_questions import generate_objective_questions_service
+from fastapi_app.schemas.generate_subjective_questions import GenerateSubjectiveQuestionsRequest, GenerateSubjectiveQuestionsResponse
+from fastapi_app.services.generate_subjective_questions import generate_subjective_questions_service
+from fastapi_app.schemas.generate_objective_questions import GenerateObjectiveQuestionsRequest, GenerateObjectiveQuestionsResponse
+from fastapi_app.schemas.mark_subjective_answersheet import MarkSubjectiveAnswerSheetRequest, MarkSubjectiveAnswerSheetResponse
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from io import BytesIO
 
 app = FastAPI()
 
-@app.post("/generate_question_paper", response_model=GenerateQuestionPaperResponse)
-async def generate_paper(
+@app.post("/generate_objective_questions", response_model=GenerateObjectiveQuestionsResponse)
+async def generate_objective_questions(
     data: str = Form(...),
     file: UploadFile = File(...)
-) -> GenerateQuestionPaperResponse:
+) -> GenerateObjectiveQuestionsResponse:
     """
-    Generate a question paper based on the provided syllabus and requirements.
+    Generate a objective questions based on the provided syllabus and requirements.
     """
     try:
-        paperRequest = GenerateQuestionPaperRequest.model_validate_json(data)
+        paperRequest = GenerateObjectiveQuestionsRequest.model_validate_json(data)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid JSON for request model: {e}")
     contents = await file.read()
     stream = BytesIO(contents)
-    response = generate_question_paper_service(paperRequest, stream)
+    response = generate_objective_questions_service(paperRequest, stream)
+    return response
+
+
+@app.post("/generate_subjective_questions", response_model=GenerateSubjectiveQuestionsResponse)
+async def generate_subjective_questions(
+    data: str = Form(...),
+    file: UploadFile = File(...)
+) -> GenerateObjectiveQuestionsResponse:
+    """
+    Generate a subjective questions based on the provided syllabus and requirements.
+    """
+    try:
+        paperRequest = GenerateSubjectiveQuestionsRequest.model_validate_json(data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON for request model: {e}")
+    contents = await file.read()
+    stream = BytesIO(contents)
+    response = generate_subjective_questions_service(paperRequest, stream)
     return response
 
 
 
-@app.post("/mark_bisep_subjective", response_model=MarkSubjectiveSheetResponse)
+
+@app.post("/mark_subjective_answersheet", response_model=MarkSubjectiveAnswerSheetResponse)
 async def mark_subjective_sheet(
     data: str = Form(...),
     file: UploadFile = File(...)
-) -> MarkSubjectiveSheetResponse:
+) -> MarkSubjectiveAnswerSheetResponse:
     """
     Mark the subjective answer sheet based on rubrics.
     """
     try:
-        request = MarkSubjectiveSheetRequest.model_validate_json(data)
+        request = MarkSubjectiveAnswerSheetRequest.model_validate_json(data)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid JSON for request model: {e}")
     contents = await file.read()
     stream = BytesIO(contents)
-    response = mark_subjective_sheet_service(request, stream)
+    response = mark_subjective_answersheet_service(request, stream)
     return response
+

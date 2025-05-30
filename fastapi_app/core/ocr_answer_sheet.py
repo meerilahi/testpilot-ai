@@ -3,17 +3,18 @@ import os
 import base64
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk
-from core.merge_images import combine_base64_images
+from fastapi_app.core.merge_images import combine_base64_images
+from fastapi_app.core.encode_images import encode_images_to_base64
+from io import BytesIO
 
 load_dotenv()
 
 client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
 
 def ocr_answer_sheet(images_dict):
+    encoded_dict = encode_images_to_base64(images_dict)
     result = {}
-    for qn, page_images in images_dict.items():
-        if qn in [6,7,8,9,10,11,12,13]:
-            continue
+    for qn, page_images in encoded_dict.items():
         markdowns = []
         images = []
         result[qn] = {}

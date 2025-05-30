@@ -3,7 +3,7 @@ import os
 import json
 from dotenv import load_dotenv
 from mistralai import  ImageURLChunk, TextChunk
-from schemas.mark_subjective_sheet import MarkSubjectiveSheetRequest
+from fastapi_app.schemas.mark_subjective_answersheet import MarkSubjectiveAnswerSheetRequest
 from typing import List, Tuple, Optional, Dict, Any
 
 load_dotenv()
@@ -80,7 +80,7 @@ def mark_answer(
     return result
 
 
-def mark_answer_sheet(ocr_result, request:MarkSubjectiveSheetRequest, filter_qns):
+def mark_answer_sheet(ocr_result, request:MarkSubjectiveAnswerSheetRequest):
     answer_keys = {q.question_number : q.answer_key  for q in request.list_of_questions}
     diagram_keys = {q.question_number : q.diagram_key  for q in request.list_of_questions}
     rubrics = {q.question_number : q.rubrics for q in request.list_of_questions}
@@ -88,7 +88,7 @@ def mark_answer_sheet(ocr_result, request:MarkSubjectiveSheetRequest, filter_qns
     grammer_penalties = {q.question_number : q.grammer_penalty for q in request.list_of_questions}
     mark_sheet = {}
     
-    for qn in filter_qns:
+    for qn in ocr_result.keys():
         print(f"Marking question no {qn}")
         marks_dict = mark_answer(answer_text=ocr_result[qn]['markdown'], diagram_image=ocr_result[qn]['image'],  answer_key=answer_keys[qn], diagram_key=diagram_keys[qn], rubric=rubrics[qn], marks=question_marks[qn], grammer_penalty=grammer_penalties[qn])
         mark_sheet[qn] = marks_dict
