@@ -1,7 +1,4 @@
 from PIL import Image
-import numpy as np
-import cv2
-
 def extract_student_id(image: Image.Image) -> int:
     # image = np.array(image)
     # cropped_image = image[525:805, 105:300]
