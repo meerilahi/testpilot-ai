@@ -1,18 +1,26 @@
-# Use official Python base image
 FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements and install
+# Install OpenCV dependency
+RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy entire project
+# Copy the rest of the code
 COPY . .
 
-# Expose port
+# Set environment variables if needed (optional)
+# ENV SOME_ENV_VAR=value
+
+# Expose FastAPI port
 EXPOSE 8000
 
-# Run FastAPI app with uvicorn
+# Run the app using uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
