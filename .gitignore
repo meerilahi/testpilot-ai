@@ -1,6 +1,16 @@
 # Ignore virtual environment
+.pilotenv/
 .venv/
 .env/
 
 # Ignore environment files
 *.env
+
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+*.db
+*.sqlite3

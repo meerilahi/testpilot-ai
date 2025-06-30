@@ -1,3 +1,11 @@
+# Ignore virtual environment
+.pilotenv/
+.venv/
+.env/
+
+# Ignore environment files
+*.env
+
 __pycache__
 *.pyc
 *.pyo
