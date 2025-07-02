@@ -2,7 +2,7 @@ from typing import List
 import firebase_admin
 from firebase_admin import credentials, firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
-from scripts.book_model import BookModel, ChapterModel
+from book_model import BookModel, ChapterModel
 
 class FirestoreCRUD:
 

@@ -10,7 +10,7 @@ def update_books():
         if not os.path.exists(book_path):
             os.makedirs(book_path)
         for chapter in book.chapters:
-            chapter_file = os.path.join(book_path, f"{chapter.chapter_No}_ocr.md")
+            chapter_file = os.path.join(book_path, f"{chapter.chapter_No}.md")
             with open(chapter_file, 'w', encoding='utf-8') as f:
                 f.write(f"Title: {chapter.title}\n\n{chapter.content}")
 
