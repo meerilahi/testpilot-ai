@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Annotated
 
 class GenerateMCQRequest(BaseModel):
-    bookId : Annotated[str, "Id of the book in the KP text books"]
+    bookTitle : Annotated[str, "Title of the book in the KP text books"]
     chapter_number : Annotated[int, "Chapter number for which MCQs are to be generated"]
     difficulty_level: Annotated[str, "Difficulty level of the MCQs to be generated. It can be 'easy', 'medium', or 'hard'"]
 

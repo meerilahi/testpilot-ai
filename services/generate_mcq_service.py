@@ -11,7 +11,7 @@ map = {
 
 def generate_MCQ_service(request: GenerateMCQRequest) -> GenerateMCQResponse:
     print("Reading chapter text from markdown file:")
-    text = get_chapter_text(request.bookId, request.chapter_number)
+    text = get_chapter_text(request.bookTitle, request.chapter_number)
     print("Generating MCQ:")
     mcq = generate_mcq(request.difficulty_level, text)
     return GenerateMCQResponse(
