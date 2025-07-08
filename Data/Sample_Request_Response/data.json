@@ -1,0 +1,404 @@
+{
+  "answerSheetPdfUrl": "https://firebasestorage.googleapis.com/v0/b/todo-a907b.firebasestorage.app/o/objectiveAnswerSheets%2Fsample_answer_sheet.pdf?alt=media&token=bc88e7c5-a3bc-4426-91bd-368753c5261a",
+  "list_of_questions": [
+    {
+      "question_number": 1,
+      "q_type": "short",
+      "question_text": "Complete the organization level against each example : \n Examples Stomach \n Man \n Glucose \n Ribosome",
+      "answer_key": " Examples \t Organization Level \n Stomach \t Organ \n Man \t Organism \n Glucose \t Molecule \n Ribosome \t Organelles",
+      "rubrics": [
+        [
+          "Stomach to Organ",
+          1.0
+        ],
+        [
+          "Man is Organism",
+          1.0
+        ],
+        [
+          "Glucose is Molecule",
+          1.0
+        ],
+        [
+          "Ribosome is Organelles",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 2,
+      "q_type": "short",
+      "question_text": "Briefly explain following four characteristics of kingdom Protista: a. Cell Type, b. Nuclear envelope, c. cell wall, d. mode of nutrition ",
+      "answer_key": " a. Cell type: Eukaryotic unicellular- colonial or simple multicellular \n b. Nuclear envelope: Present \n c. Cell wall: Present in some forms, various types \n d. Mode of nutrition: Photosynthetic or heterotrophic or combination of these.",
+      "rubrics": [
+        [
+          "Cell type: Eukaryotic unicellular- colonial or simple multicellular",
+          1.0
+        ],
+        [
+          "Nuclear envelope: Present",
+          1.0
+        ],
+        [
+          " Cell wall: Present in some forms, various types",
+          1.0
+        ],
+        [
+          "Mode of nutrition: Photosynthetic or heterotrophic or combination of these",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 3,
+      "q_type": "short",
+      "question_text": "Write a short note on electron microscope keeping in view its radiation type, lenses, magnification and images.",
+      "answer_key": "Radiation type: Beams of electrons \n Lenses: Magnetic \n Magnification: 100 times greater than light \n Images: TEM shows 2D while SEM shows 3D images",
+      "rubrics": [
+        [
+          "Radiation type: Beams of electrons",
+          1.0
+        ],
+        [
+          "Lenses: Magnetic",
+          1.0
+        ],
+        [
+          "Magnification: 100 times greater than light",
+          1.0
+        ],
+        [
+          "Images: TEM shows 2D while SEM shows 3D images",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 4,
+      "q_type": "short",
+      "question_text": "Define turgor and write any TWO points to show its importance Textbook in plants.",
+      "answer_key": " **Turgor:** The pressure which is exerted by the cytoplasm against the answer cell wall is known as turgor pressure and the phenomenon is called turgor.\n\n        **Importance of turgor in plants**:\n\n        i. It plays an important role in maintaining the shape of the plant.\n\n        ii. It provides supports to plants especially in young tissues.\n\n        iii. It helps in closing and opening of the stomata.\n\n        iv. Some flowers open during the day time and close at night. This is also due to change in turgor in the cells of sepals of flowers.",
+      "rubrics": [
+        [
+          "Correct definition of turgor",
+          2.0
+        ],
+        [
+          "Correct Importance",
+          1.0
+        ],
+        [
+          "Correct Importance",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 5,
+      "q_type": "short",
+      "question_text": "How is a prokaryotic cell different from a eukaryotic cell in Textbook terms of nucleus, cell membrane, cell wall and size.",
+      "answer_key": "\n        | Component           | Prokaryotic Cell                                                                 | Eukaryotic Cell                                                       |\n        |--------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|\n        | Nucleus            | They lack membrane-bound nucleus.                                                 | The nuclear material is surrounded by a double membrane.              |\n        | Membrane organelles| Membrane bounded organelles are absent.                                           | Membrane bounded organelles are present.                              |\n        | Cell wall          | Cell wall is made of peptidoglycan (a singular larger polymer of amino acids and sugar). | Cell wall is made of cellulose (plants) or chitin (fungi).       |\n        | Size               | Comparatively smaller in size (0.5 \u00b5m)                                             | Larger in size (10\u2013100 \u00b5m)                                            |\n        ",
+      "rubrics": [
+        [
+          "Correct difference in Nucleus",
+          1.0
+        ],
+        [
+          "Correct difference in Membrane organelles",
+          1.0
+        ],
+        [
+          "Correct difference in Cell wall",
+          1.0
+        ],
+        [
+          "Correct difference in Size",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 6,
+      "q_type": "short",
+      "question_text": "Enlist the events (and show with diagram) through which mitotic apparatus is formed in prophase in animal cells",
+      "answer_key": " i. In animal cell, when two parts of centrioles reach opposite answer pole of the cell. They make a network of spindle fibers betweenthe two poles. The complete set of spindle fiber forms mitotic apparatus. ",
+      "rubrics": [
+        [
+          "Event : two parts of centrioles reach opposite pole of the cell",
+          1.0
+        ],
+        [
+          "Event : They make a network of spindle fibers between the two poles",
+          1.0
+        ],
+        [
+          "Correct Diagram",
+          2.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 7,
+      "q_type": "short",
+      "question_text": "How are enzymes specific for their substrate? Justify it with the help of diagram of shape of active site of enzyme and its specificity. Also give its TWO examples.",
+      "answer_key": " Examples:\n\n        Enzyme protease: Speed up the digestion of protein only.\n\n        Enzyme amylase: Works for the digestion of starch only.\n\n        Enzyme cellulose: Speed up the digestion of cellulose only.\n\n        Enzyme lipase: Digests lipase only.",
+      "rubrics": [
+        [
+          "Diagram",
+          2.0
+        ],
+        [
+          "First correct example ",
+          1.0
+        ],
+        [
+          "Second correct example ",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 8,
+      "q_type": "short",
+      "question_text": "How are enzymes specific for their substrate? Justify it with the help of diagram of shape of active site of enzyme and its specificity. Also give its TWO examples.",
+      "answer_key": "\n        | Respiration | Photosynthesis |\n        |-------------|----------------|\n        | It is energy releasing process. | It is an energy storing process. |\n        | Stored energy of food molecules is released for cellular activities. | Energy of sunlight is trapped by the chlorophyll and converted into chemical energy and stored in organic food molecules. |\n        | Glucose and oxygen are the raw materials while carbon dioxide and water are the products. | Carbon dioxide and water are used as raw materials while glucose and oxygen are the products. |\n        | Oxygen is required in aerobic respiration. | Oxygen is liberated as by product. |\n        | It takes place in all the cells of all living organisms. | It takes place only in green cells of plants, algae and some bacteria. |\n        | It is destructive (catabolic) process during which organic food molecules are broken and energy is released. | It is constructive (anabolic) process during which organic food molecules are synthesized and energy is stored. |\n        | Due to respiration, loss of weight occurs. | Due to photosynthesis, plant body gains weight. |\n        | It occurs round the clock, day and night. It does not require sunlight. | It occurs during the daytime when sunlight is available which is necessary for it. |\n        ",
+      "rubrics": [
+        [
+          "One Correct Difference",
+          1.0
+        ],
+        [
+          "One Correct Difference ",
+          1.0
+        ],
+        [
+          "One Correct Difference",
+          1.0
+        ],
+        [
+          "One Correct Difference",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 9,
+      "q_type": "short",
+      "question_text": "Write any FOUR deficiency symptoms of vitamin D.",
+      "answer_key": "\n        Deficiency symptoms of vitamin D:\n        1. Bones can become thin, brittle and soft.\n\n        2. In children vitamin D deficiency leads to rickets (condition in\n        which bones weaken and bow under pressure).\n\n        3. In adults, vitamin D deficiency symptom causes\n        osteomalacia (soft bones).\n\n        4. Vitamin D deficiency symptom also causes fractures.\n\n        Note: Any other related or correct deficiency symptom of vitamin D out of textbook may be considered.\n        ",
+      "rubrics": [
+        [
+          "One Correct symptom",
+          1.0
+        ],
+        [
+          "One Correct symptom",
+          1.0
+        ],
+        [
+          "One Correct symptom",
+          1.0
+        ],
+        [
+          "One Correct symptom",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 10,
+      "q_type": "short",
+      "question_text": "List any FOUR functions of plasma in human body.",
+      "answer_key": "\n        FUNCTIONS OF PLASMA IN HUMAN BODY:\n\n        1. Plasma keeps all the tissues moist.\n\n        2. Plasma of the blood transport nutrients, water, salt, Textbook Board hormones and waste materials.\n\n        3. Plasma helps in regulating body temperature.\n\n        4. Small amount of oxygen is also carried by plasma. Most of the carbon dioxide is carried by plasma.\n\n        5. Plasma proteins e.g. albumins maintain the osmotic pressure of blood\n\n        6. Important plasma proteins called antibodies defend the body against pathogens.\n\n        7. Another plasma protein fibrinogen is responsible for blood clotting.\n\n        ",
+      "rubrics": [
+        [
+          "One Correct Function",
+          1.0
+        ],
+        [
+          "One Correct Function ",
+          1.0
+        ],
+        [
+          "One Correct Function",
+          1.0
+        ],
+        [
+          "One Correct Function",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 11,
+      "q_type": "short",
+      "question_text": "Why are arteries important? Draw a labelled diagram of artery.",
+      "answer_key": "\n        IMPORTANCE OF ARTERIES.:\n        All the arteries carry oxygenated blood from heart to other organ of the body except pulmonary arteries which carry deoxygenated blood to lungs.\n        ",
+      "rubrics": [
+        [
+          "Correct explanation of importance",
+          2.0
+        ],
+        [
+          "Correct Diagram ",
+          2.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 4.0
+    },
+    {
+      "question_number": 12,
+      "q_type": "long",
+      "question_text": "i. Explain the applications of mathematics rules used in biology research work. ii. Define the term conservation. Write any THREE examples of the steps taken in Pakistan to conserve biodiversity.",
+      "answer_key": "\n        i. APPLICATIONS OF MATHEMATICS RULES USED IN BIOLOGY RESEARCH WORK\n\n        \u2022 Population studies\n\n        \u2022 Drugs studies\n\n        \u2022 Sequencing of plants and animals\n\n        \u2022 DNA\n\n        All the above fields of biology require mathematical knowledge rules for organizing and analyzing data.\n\n        ii. CONSERVATION \n\n        Conservation means to use the resources such as plants, animals, minerals and water in a sensible way.\n\n        Examples of steps taken in Pakistan for conservation of biodiversity\n\n        \u2022 Indus Dolphin Project (IDP) to save Indus Dolphin\n\n        \u2022 Projected Areas Management Project in Machian in Azad Jammu Kashmir\n\n        \u2022 Marine Turtle Conservation Project\n\n        \u2022 Ban on the hunting of markhor and urial in Balochistan\n\n        \u2022 Himalayan Jungle Project to protect the biodiversity in Himalayan region\n\n        \u2022 Conservation of migratory birds in Chitral, Khyber Pakhtunkwa\n\n        \u2022 Himalayan Wildlife Project to check the hunting of brown bears\n\n        \u2022 Conservation of Chiltan Markhor\n\n        \u2022 Ban on Bear-baiting in Pakistan\n\n        ",
+      "rubrics": [
+        [
+          "one correct application of mathematics in biology",
+          1.0
+        ],
+        [
+          "one correct application of mathematics in biology",
+          1.0
+        ],
+        [
+          "one correct application of mathematics in biology",
+          1.0
+        ],
+        [
+          "one correct examples of steps",
+          1.0
+        ],
+        [
+          "one correct examples of steps",
+          1.0
+        ],
+        [
+          "one correct examples of steps",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 7.0
+    },
+    {
+      "question_number": 13,
+      "q_type": "long",
+      "question_text": "i. Briefly explain following animal tissues: a. Fibrous connective tissues, b. Smooth muscles, c. Nervous tissues, d. Epithelial tissue. ii. Define Cell Cycle and write names of its TWO main stages.",
+      "answer_key": "\n        i. ANIMAL TISSUES\n\n        a. Fibrous connective tissues: Its extracellular material contains tightly packed collagen fibers. It is the form of tendon which attaches muscles to bones and ligaments join two bones.\n\n        b. Smooth muscles: These are found in the walls of hollow structures such as blood vessels, gut etc. They produce slow contractions.\n        c. Nervous tissues: It is composed of nerve cells which are called neurons. Neurons are capable of transmitting nerve impulses to conduct messages in the whole body.\n        d. Epithelial tissue: The skin is made of epithelial tissue, which is in the form of continuous sheets of cells. Epithelial tissue also lines the gut, lungs and urinary tract.\n        ii. CELL CYCLE:\n\n        The series of events that take place in a eukaryotic cell leading to its replication is called cell cycle.\n\n        Main stages of cell cycle : \n\n        \u2022 Interphase or resting stage \n\n        \u2022 Division phase (Mitosis or Meiosis) \n\n        ",
+      "rubrics": [
+        [
+          "one correct brief description of given tissue",
+          1.0
+        ],
+        [
+          "one correct brief description of given tissue",
+          1.0
+        ],
+        [
+          "one correct brief description of given tissue",
+          1.0
+        ],
+        [
+          "one correct brief description of given tissue",
+          1.0
+        ],
+        [
+          "correct definition of cell cycle",
+          1.0
+        ],
+        [
+          " correct name of one stage of cell cycle",
+          1.0
+        ],
+        [
+          " correct name of one stage of cell cycle",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 7.0
+    },
+    {
+      "question_number": 14,
+      "q_type": "long",
+      "question_text": "i. Why is mitochondrial enzyme called intracellular? Give justification. ii. Explain the synthesis and breaking of ATP through ATP-ADP cycle with proper diagrams",
+      "answer_key": "\n        i. Why is mitochondrial enzyme called intracellular?\n        All enzymes are synthesized inside cells. Mitochondrial enzyme also work inside the cells so it is also called intracellular enzymes.\n        ii. Synthesis and breaking of ATP through ATP-ADP cycle Synthesis:\n        Synthesis : ATP molecules are constantly broken by the cell into ADP and inorganic phosphate and energy is obtained.\n        Breaking of ATP: ATP molecules are constantly regenerated from ADP and phosphate using energy released from the breakdown of food. This is how constant cycle of ATP breakdown and reformation goes on in the living cells.\n        ",
+      "rubrics": [
+        [
+          "Correct description of mitochondrial enzyme as intracellular of ATP",
+          3.0
+        ],
+        [
+          "Correct description of Synthesis of ATP",
+          1.0
+        ],
+        [
+          "Correct diagram of Synthesis",
+          1.0
+        ],
+        [
+          "Correct description of Breaking of ATP",
+          1.0
+        ],
+        [
+          "Correct diagram of Breaking of ATP",
+          1.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 7.0
+    },
+    {
+      "question_number": 15,
+      "q_type": "long",
+      "question_text": "i. State symptoms, causes and preventions of the diarrhea. ii. Differentiate between Atherosclerosis and Arteriosclerosis",
+      "answer_key": "\n        i. DIARRHEA :\n        Symptoms : frequent, watery, loose bowel movement, abdominal pain, nausea and vomiting\n        Causes : bacterial infection, viral or parasitic infection of the colon walls\n        Prevention : can be prevented by taking sufficient amounts of clean water and food\n        ii. Differentiate between Atherosclerosis and Arteriosclerosis\n        Atherosclerosis : It is characterized by the deposition of fatty material e.g. cholesterol inside the arteries. Due to this, the lumen (interior) of the artery becomes narrow and blood flows with difficulty.Later, the artery may completely be blocked. Some obvious reasons of atherosclerosis are hypertension, smoking, diabetes mellitus and increased lipid level in blood\n        Arteriosclerosis : It is the hardening of the arteries due to the deposition of calcium in the walls of the arteries. Such artery cannot expand when blood is pumped with pressure into it with systole. Due to this inflexibility makes the heart to work hard. This disorder occurs with increasing age. \n        ",
+      "rubrics": [
+        [
+          "Correct symptoms of diarrhea",
+          1.0
+        ],
+        [
+          "Correct causes of diarrhea",
+          1.0
+        ],
+        [
+          "Correct preventions of diarrhea",
+          1.0
+        ],
+        [
+          "Correct description (differences) of Atherosclerosis.",
+          2.0
+        ],
+        [
+          "Correct description (differences) of Arteriosclerosis.",
+          2.0
+        ]
+      ],
+      "grammer_penalty": "Low",
+      "question_marks": 7.0
+    }
+  ],
+  "language": "English"
+}
